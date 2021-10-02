@@ -7,6 +7,7 @@ public class Ex_10_Delete_Space {
         Scanner scanner = new Scanner(System.in);
         System.out.print("String before delete space: ");
         String string = scanner.nextLine();
-        System.out.println("String after delete space: " + string.replaceAll(" ", "").trim());
+//        System.out.println("String after delete space: " + string.replaceAll(" ", "").trim());
+
     }
 }

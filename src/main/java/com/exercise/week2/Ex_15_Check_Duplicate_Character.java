@@ -12,9 +12,9 @@ public class Ex_15_Check_Duplicate_Character {
         char[] ch = string.toCharArray();
         System.out.println("Duplicate character are: ");
 
-        for (int i = 0; i < string.length(); i++) {
+        for (int i = 0; i < ch.length; i++) {
             count = 1;
-            for (int j = i + 1; j < string.length(); j++) {
+            for (int j = i + 1; j < ch.length; j++) {
                 if (ch[i] == ch[j] && ch[i] != ' ') {
                     count++;
                     ch[j] = '0';
