@@ -8,11 +8,13 @@ import java.util.*;
 
 public class Statement {
     public static void main(String[] args) throws IOException {
-        String file1 = "F:\\0101_saoke_t7.csv";
+        String file1 = "F:\\0101_saoke_t7.csv"; // chỉnh lại path seperator
         String file2 = "F:\\0101_saoke_t8.csv";
+        String file3 = "F:\\0101_saoke_t9.csv";
         List<String> fileName = new ArrayList<>();
         fileName.add(file1);
         fileName.add(file2);
+        fileName.add(file3);
         for (String file : fileName) {
             try (CSVReader reader = new CSVReader(new FileReader(file))) {
                 List<String[]> r = reader.readAll();
@@ -36,23 +38,54 @@ public class Statement {
                     column3.add(row.get(5));
                 }
 
-
                 List<Long> sumIn = new ArrayList<Long>();
                 List<Long> sumOut = new ArrayList<Long>();
                 List<String> isDisplayed = new ArrayList<String>();
-
-                for (int i = 1; i < column3.size(); i++) {
-                    if (isDisplayed.contains(column3.get(i))) {
-                        int index = isDisplayed.indexOf(column3.get(i));
-                        sumIn.set(index, sumIn.get(index) + Long.parseLong(column1.get(i)));
-                        sumOut.set(index, sumOut.get(index) + Long.parseLong(column2.get(i)));
-                    } else {
-                        isDisplayed.add(column3.get(i));
-                        int index1 = isDisplayed.indexOf(column3.get(i));
-                        sumIn.add(index1, Long.parseLong(column1.get(i)));
-                        sumOut.add(index1, Long.parseLong(column2.get(i)));
+                if (file.equals("F:\\0101_saoke_t9.csv")){
+                    for (int i = 1; i < column2.size()-1; i++) { // Chỗ -1 do file data sai, dư 1 dòng trắng, lười xóa trong file nên để -1
+                        if (column2.get(i).equals("1")) {
+                            if (isDisplayed.contains(column2.get(i))) {
+                                int index = isDisplayed.indexOf(column2.get(i));
+                                sumIn.set(index, sumIn.get(index) + Long.parseLong(column1.get(i)));
+                                sumOut.set(index, sumOut.get(index) + Long.parseLong(column2.get(i)));
+                            } else {
+                                isDisplayed.add("1");
+                                int index1 = isDisplayed.indexOf(column2.get(i));
+                                sumIn.add(index1, Long.parseLong(column1.get(i)));
+                                sumOut.add(index1, Long.parseLong(column2.get(i)));
+                            }
+                        }
+                        else {
+                            if (isDisplayed.contains(column2.get(i))) {
+                                int index = isDisplayed.indexOf(column2.get(i));
+                                sumIn.set(index, sumIn.get(index) + Long.parseLong(column1.get(i)));
+                                sumOut.set(index, sumOut.get(index) + Long.parseLong(column2.get(i)));
+                            } else {
+                                isDisplayed.add(column2.get(i));
+                                int index1 = isDisplayed.indexOf(column2.get(i));
+                                sumIn.add(index1, Long.parseLong(column1.get(i)));
+                                sumOut.add(index1, Long.parseLong(column2.get(i)));
+                            }
+                        }
+                    }
+                } else {
+                    for (int i = 1; i < column3.size(); i++) {
+                        if (isDisplayed.contains(column3.get(i))) {
+                            int index = isDisplayed.indexOf(column3.get(i));
+                            sumIn.set(index, sumIn.get(index) + Long.parseLong(column1.get(i)));
+                            sumOut.set(index, sumOut.get(index) + Long.parseLong(column2.get(i)));
+                        } else {
+                            isDisplayed.add(column3.get(i));
+                            int index1 = isDisplayed.indexOf(column3.get(i));
+                            sumIn.add(index1, Long.parseLong(column1.get(i)));
+                            sumOut.add(index1, Long.parseLong(column2.get(i)));
+                        }
                     }
                 }
+
+
+
+
 
                 for (int i = 0; i < isDisplayed.size(); i++) {
                     System.out.print(isDisplayed.get(i) + "--->");
